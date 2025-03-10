@@ -15,12 +15,12 @@ variable "oac_desc" {
 }
 
 variable "enabled" {
-  type = bool
+  type    = bool
   default = true
 }
 
 variable "ipv6_enabled" {
-  type = bool
+  type    = bool
   default = false
 }
 
@@ -37,22 +37,22 @@ variable "viewer_proto_policy" {
 }
 
 variable "min_ttl" {
-  type = number
+  type    = number
   default = 0
 }
 
 variable "max_ttl" {
-  type = number
+  type    = number
   default = 86400
 }
 
 variable "default_ttl" {
-  type = number
+  type    = number
   default = 3600
 }
 
 variable "query_string" {
-  type = bool
+  type    = bool
   default = false
 }
 
@@ -61,7 +61,7 @@ variable "cookie_forward" {
 }
 
 variable "compress" {
-  type = bool
+  type    = bool
   default = false
 }
 
@@ -70,7 +70,7 @@ variable "price_class" {
 }
 
 variable "aliases" {
-  type = list(string)
+  type    = list(string)
   default = ["cf.example.com"]
 }
 
@@ -79,12 +79,12 @@ variable "bucket_domain_name" {}
 variable "origin_id" {}
 
 variable "cache_allowed_methods" {
-  type = list(string)
+  type    = list(string)
   default = ["GET", "HEAD"]
 }
 
 variable "cached_methods" {
-  type = list(string)
+  type    = list(string)
   default = ["GET", "HEAD"]
 }
 
@@ -93,12 +93,12 @@ variable "restriction_type" {
 }
 
 variable "loactions" {
-  type = list(string)
+  type    = list(string)
   default = ["US", "EU"]
 }
 
 variable "cf_def_cert" {
-  type = bool
+  type    = bool
   default = true
 }
 

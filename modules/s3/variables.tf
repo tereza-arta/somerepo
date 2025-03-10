@@ -3,13 +3,13 @@ variable "bucket_name" {
 }
 
 variable "destroy" {
-  type = bool
-  default = true
+  type        = bool
+  default     = true
   description = "In bucket destroy time destroy bucket objects also or not"
 }
 
 variable "object_lock" {
-  type = bool
+  type    = bool
   default = false
 }
 
@@ -18,22 +18,22 @@ variable "bucket_tag" {
 }
 
 variable "block_public_acls" {
-  type = bool
+  type    = bool
   default = true
 }
 
 variable "block_public_policy" {
-  type = bool
+  type    = bool
   default = true
 }
 
 variable "ignore_public_acls" {
-  type = bool
+  type    = bool
   default = true
 }
 
 variable "restrict_public_buckets" {
-  type = bool
+  type    = bool
   default = true
 }
 
