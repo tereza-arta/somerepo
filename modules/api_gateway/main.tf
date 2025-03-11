@@ -1,6 +1,15 @@
 resource "aws_apigatewayv2_api" "this" {
   name          = var.api_gw_name
   protocol_type = var.api_gw_proto
+
+  cors_configuration {
+    allow_origins = var.allow_origins
+    allow_methods = var.allow_methods
+    allow_headers = var.allow_headers
+    expose_headers = var.expose_headers
+    max_age = var.max_age
+    allow_credentials = var.allow_credentials
+  }
 }
 
 resource "aws_cloudwatch_log_group" "this" {

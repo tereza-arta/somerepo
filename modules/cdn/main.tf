@@ -30,6 +30,7 @@ resource "aws_cloudfront_distribution" "this" {
     max_ttl                = var.max_ttl
     default_ttl            = var.default_ttl
 
+    #Instead use for.ex. cache_policy_id
     forwarded_values {
       query_string = var.query_string
       cookies {

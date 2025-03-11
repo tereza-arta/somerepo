@@ -6,6 +6,36 @@ variable "api_gw_proto" {
   default = "HTTP"
 }
 
+variable "allow_origins" {
+  type = list(string)
+  default = ["https://"]
+}
+
+variable "allow_methods" {
+  type = list(string)
+  default = [""]
+}
+
+variable "allow_headers" {
+  type = list(string)
+  default = [""]
+}
+
+variable "expose_headers" {
+  type = list(string)
+  default = [""]
+}
+
+variable "max_age" {
+  type = number
+  default = 0
+}
+
+variable "allow_credentials" {
+  type = bool
+  default = false
+}
+
 variable "log_group_name" {
   default = "for-api-gw-access-logs"
 }
