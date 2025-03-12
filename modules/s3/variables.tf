@@ -58,7 +58,7 @@ variable "acl" {
 }
 
 variable "tf_data_for_index" {
-  type = bool
+  type    = bool
   default = true
 }
 

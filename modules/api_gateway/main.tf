@@ -3,11 +3,11 @@ resource "aws_apigatewayv2_api" "this" {
   protocol_type = var.api_gw_proto
 
   cors_configuration {
-    allow_origins = var.allow_origins
-    allow_methods = var.allow_methods
-    allow_headers = var.allow_headers
-    expose_headers = var.expose_headers
-    max_age = var.max_age
+    allow_origins     = var.allow_origins
+    allow_methods     = var.allow_methods
+    allow_headers     = var.allow_headers
+    expose_headers    = var.expose_headers
+    max_age           = var.max_age
     allow_credentials = var.allow_credentials
   }
 }
@@ -64,3 +64,20 @@ resource "aws_lambda_permission" "api_gw" {
   source_arn = "${aws_apigatewayv2_api.this.execution_arn}/*/*"
 }
 
+#Certificate configuration
+#>>>>>
+resource "aws_acm_certificate" "this" {
+  count       = var.aws_cert_cnt
+  domain_name = var.domain_name
+}
+
+resource "aws_apigatewayv2_domain_name" "this" {
+  count       = var.gw_domain_name_cnt
+  domain_name = var.domain_name
+
+  domain_name_configuration {
+    certificate_arn = aws_acm_certificate.this[count.index].arn
+    endpoint_type   = var.endpoint_type
+    security_policy = "TLS_1_2"
+  }
+}

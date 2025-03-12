@@ -39,8 +39,8 @@ resource "aws_s3_bucket_versioning" "this" {
 }
 
 resource "aws_s3_object" "this" {
-  bucket       = aws_s3_bucket.this.id
-  key          = var.object_name
+  bucket = aws_s3_bucket.this.id
+  key    = var.object_name
   #source       = "${path.module}/objects/index.html"
   source       = "${path.module}/${var.obj_rel_path}"
   content_type = var.content_type

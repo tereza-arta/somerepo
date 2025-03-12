@@ -10,32 +10,32 @@ variable "api_gw_proto" {
 #variable "allow_origins" {}
 
 variable "allow_origins" {
-  type = list(string)
+  type    = list(string)
   default = ["*"]
 }
 
 variable "allow_methods" {
-  type = list(string)
+  type    = list(string)
   default = ["*"]
 }
 
 variable "allow_headers" {
-  type = list(string)
+  type    = list(string)
   default = ["*"]
 }
 
 variable "expose_headers" {
-  type = list(string)
+  type    = list(string)
   default = ["*"]
 }
 
 variable "max_age" {
-  type = number
+  type    = number
   default = 0
 }
 
 variable "allow_credentials" {
-  type = bool
+  type    = bool
   default = false
 }
 
@@ -68,18 +68,35 @@ variable "route_key" {
   default = "ANY /{proxy+}"
 }
 
-variable "perm_statement_id" {
-  default = "LambdaPermForAPIGateway"
+#variable "perm_statement_id" {
+#  default = "LambdaPermForAPIGateway"
+#}
+#
+#variable "perm_action" {
+#  default = "lambda:InvokeFunction"
+#}
+#
+##Missing
+#variable "lambda_func_name" {}
+#
+#variable "principal" {
+#  default = "apigateway.amazonaws.com"
+#}
+
+variable "aws_cert_cnt" {
+  type    = number
+  default = 0
 }
 
-variable "perm_action" {
-  default = "lambda:InvokeFunction"
+variable "domain_name" {
+  default = "somedomain.com"
 }
 
-#Missing
-variable "lambda_func_name" {}
-
-variable "principal" {
-  default = "apigateway.amazonaws.com"
+variable "gw_domain_name_cnt" {
+  type    = number
+  default = 0
 }
 
+variable "endpoint_type" {
+  default = "REGIONAL"
+}

@@ -1,3 +1,8 @@
+variable "policy_document_cnt" {
+  type    = number
+  default = 1
+}
+
 variable "policy_effect" {
   default = "Allow"
 }
@@ -16,41 +21,55 @@ variable "actions" {
   default = ["sts:AssumeRole"]
 }
 
-variable "lambda_role_name" {
-  default = "LambdaPrimaryRole"
+variable "role_cnt" {
+  type    = number
+  default = 1
 }
 
-variable "second_role_name" {
-  default = "LambdaSecondRole"
+variable "lambda_role_name" {
+  default = "LambdaPrimaryRole"
 }
 
 variable "role_policy_version" {
   default = "2012-10-17"
 }
 
-variable "role_policy_effect" {
+variable "role_policy_2_effect" {
   default = "Allow"
 }
 
-variable "role_policy_principal" {
-  default = "lambda.amazonaws.com"
-}
-
-variable "role_name" {
-  default = "ForFuncLoogging"
-}
-
-variable "policy_action" {
+variable "role_policy_2_action" {
   type = list(string)
-  default = ["logs:CreateLogStream", "logs:PutLogEvents"]
+  default = [
+    "logs:CreateLogGroup",
+    "logs:CreateLogStream",
+    "logs:PutLogEvents",
+    "logs:DescribeLogStreams"
+  ]
 }
 
-variable "sec_policy_effect" {
-  default = "Allow"
+variable "role_policy_2_resource" {
+  type    = list(string)
+  default = ["arn:aws:logs:us-east-1:637423489195:*:*"]
 }
 
-variable "policy_resource" {
-  default = "arn:aws:logs:*:*:*"
+variable "role_policy_attach_cnt" {
+  type    = number
+  default = 1
+}
+
+variable "policy_cnt" {
+  type    = number
+  default = 1
+}
+
+variable "policy_name" {
+  default = "LambdaAccessToCloudWatch"
+}
+
+variable "log_group_cnt" {
+  type    = number
+  default = 1
 }
 
 variable "log_group_name" {
@@ -58,14 +77,14 @@ variable "log_group_name" {
 }
 
 variable "retention_days" {
-  type = number
+  type    = number
   default = 1
 }
 
-#variable "prevent_destroy" {
-#  type = bool
-#  default = false
-#}
+variable "archive_file_cnt" {
+  type    = number
+  default = 1
+}
 
 variable "archive_type" {
   default = "zip"
@@ -73,6 +92,11 @@ variable "archive_type" {
 
 variable "source_dir" {
   default = "source_code"
+}
+
+variable "lambda_func_cnt" {
+  type    = number
+  default = 1
 }
 
 variable "dest_path" {
@@ -91,3 +115,51 @@ variable "lambda_runtime" {
   default = "nodejs22.x"
 }
 
+variable "log_format" {
+  default = "Text"
+}
+
+variable "alias_cnt" {
+  type    = number
+  default = 0
+}
+
+variable "alias_name" {
+  default = "lambda-alias"
+}
+
+variable "func_version" {
+  default = "1"
+}
+
+variable "recursion_cnt" {
+  type    = number
+  default = 0
+}
+
+variable "recursive_loop" {
+  default = "Allow"
+}
+
+#variable "lambda_perm_cnt" {
+#  type = number
+#  default = 1
+#}
+#
+#variable "perm_statement_id" {
+#  default = "LambdaPermForAPIGateway"
+#}
+#
+#variable "perm_action" {
+#  default = "lambda:InvokeFunction"
+#}
+#
+##Missing
+#variable "lambda_func_name" {}
+#
+#variable "principal" {
+#  default = "apigateway.amazonaws.com"
+#}
+#
+##Missing
+#variable "exec_arn" {}

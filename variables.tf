@@ -1,19 +1,19 @@
 variable "enable_s3" {
-  type = bool
+  type    = bool
   default = true
 }
 
 variable "enable_cf" {
-  type = bool
+  type    = bool
   default = true
 }
 
 variable "enable_lambda" {
-  type = bool
+  type    = bool
   default = true
 }
 
 variable "enable_api_gw" {
-  type = bool
+  type    = bool
   default = true
 }
