@@ -37,13 +37,33 @@ variable "restrict_public_buckets" {
   default = true
 }
 
+variable "obj_ownership" {
+  default = "BucketOwnerPreferred"
+}
+
 variable "object_name" {
   default = "index.html"
+}
+
+variable "obj_rel_path" {
+  default = "objects/index.html"
+}
+
+variable "content_type" {
+  default = "text/html"
 }
 
 variable "acl" {
   default = "private"
 }
+
+variable "tf_data_for_index" {
+  type = bool
+  default = true
+}
+
+#Missing
+variable "backend_endpoint" {}
 
 variable "versioning" {
   default = "Enabled"

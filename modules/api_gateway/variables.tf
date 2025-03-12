@@ -6,24 +6,27 @@ variable "api_gw_proto" {
   default = "HTTP"
 }
 
+#Missing
+#variable "allow_origins" {}
+
 variable "allow_origins" {
   type = list(string)
-  default = ["https://"]
+  default = ["*"]
 }
 
 variable "allow_methods" {
   type = list(string)
-  default = [""]
+  default = ["*"]
 }
 
 variable "allow_headers" {
   type = list(string)
-  default = [""]
+  default = ["*"]
 }
 
 variable "expose_headers" {
   type = list(string)
-  default = [""]
+  default = ["*"]
 }
 
 variable "max_age" {
