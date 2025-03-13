@@ -95,13 +95,14 @@ resource "aws_acm_certificate" "this" {
   domain_name = var.domain_name
 }
 
+#???
 resource "aws_apigatewayv2_domain_name" "this" {
   count       = var.gw_domain_name_cnt
   domain_name = var.domain_name
 
   domain_name_configuration {
     certificate_arn = aws_acm_certificate.this[count.index].arn
-    endpoint_type   = var.endpoint_type
+    endpoint_type   = "REGIONAL"
     security_policy = "TLS_1_2"
   }
 }

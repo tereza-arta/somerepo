@@ -7,11 +7,11 @@ output "invoke_arn" {
 }
 
 output "policy_doc_json" {
-  value = aws_iam_policy_document.this.*.json
+  value = data.aws_iam_policy_document.this.*.json
 }
 
 output "policy_doc_min_json" {
-  value = aws_iam_policy_document.this.*.minified_json
+  value = data.aws_iam_policy_document.this.*.minified_json
 }
 
 output "role_id" {
