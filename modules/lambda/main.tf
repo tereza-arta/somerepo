@@ -83,6 +83,7 @@ resource "aws_lambda_alias" "this" {
 
 resource "aws_lambda_function_recursion_config" "this" {
   count          = var.recursion_cnt
+  function_name  = aws_lambda_function.for_api[count.index].name
   recursive_loop = var.recursive_loop
 }
 

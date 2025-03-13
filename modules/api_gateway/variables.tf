@@ -1,3 +1,8 @@
+variable "api_cnt" {
+  type    = number
+  default = 1
+}
+
 variable "api_gw_name" {
   default = "testApiGW"
 }
@@ -39,13 +44,32 @@ variable "allow_credentials" {
   default = false
 }
 
+variable "api_log_group_cnt" {
+  type    = number
+  default = 1
+}
+
 variable "log_group_name" {
   default = "for-api-gw-access-logs"
+}
+
+variable "deployment_cnt" {
+  type    = number
+  default = 0
+}
+
+variable "deploy_desc" {
+  default = "Some-deploy-desc"
 }
 
 variable "log_retention_days" {
   type    = number
   default = 30
+}
+
+variable "api_stage_cnt" {
+  type    = number
+  default = 1
 }
 
 variable "stage_name" {
@@ -57,6 +81,11 @@ variable "stage_auto_deploy" {
   default = true
 }
 
+variable "integration_cnt" {
+  type    = number
+  default = 1
+}
+
 variable "integration_type" {
   default = "AWS_PROXY"
 }
@@ -64,24 +93,34 @@ variable "integration_type" {
 #Missing
 variable "target_uri" {}
 
+variable "route_cnt" {
+  type    = number
+  default = 1
+}
+
 variable "route_key" {
   default = "ANY /{proxy+}"
 }
 
-#variable "perm_statement_id" {
-#  default = "LambdaPermForAPIGateway"
-#}
-#
-#variable "perm_action" {
-#  default = "lambda:InvokeFunction"
-#}
-#
-##Missing
-#variable "lambda_func_name" {}
-#
-#variable "principal" {
-#  default = "apigateway.amazonaws.com"
-#}
+variable "lambda_perm_cnt" {
+  type    = number
+  default = 1
+}
+
+variable "perm_statement_id" {
+  default = "LambdaPermForAPIGateway"
+}
+
+variable "perm_action" {
+  default = "lambda:InvokeFunction"
+}
+
+#Missing
+variable "lambda_func_name" {}
+
+variable "principal" {
+  default = "apigateway.amazonaws.com"
+}
 
 variable "aws_cert_cnt" {
   type    = number

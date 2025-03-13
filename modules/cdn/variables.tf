@@ -1,3 +1,8 @@
+variable "cf_oac_cnt" {
+  type    = number
+  default = 1
+}
+
 variable "cf_name" {
   default = "With S3"
 }
@@ -12,6 +17,11 @@ variable "sign_behavior" {
 
 variable "oac_desc" {
   default = "Some OAC desc"
+}
+
+variable "cf_distribution_cnt" {
+  type    = number
+  default = 1
 }
 
 variable "enabled" {
@@ -100,6 +110,38 @@ variable "loactions" {
 variable "cf_def_cert" {
   type    = bool
   default = true
+}
+
+variable "policy_doc_cnt" {
+  type    = number
+  default = 1
+}
+
+variable "policy_action" {
+  type    = list(string)
+  default = ["s3:GetObject"]
+}
+
+variable "principal_type" {
+  default = "Service"
+}
+
+variable "principals" {
+  type    = list(string)
+  default = ["cloudfront.amazonaws.com"]
+}
+
+variable "condition_name" {
+  default = "StringEquals"
+}
+
+variable "condition_var" {
+  default = "AWS:SourceArn"
+}
+
+variable "policy_cnt" {
+  type    = number
+  default = 1
 }
 
 variable "bucket_arn" {}

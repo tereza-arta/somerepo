@@ -1,5 +1,14 @@
+variable "bucket_cnt" {
+  type    = number
+  default = 1
+}
+
 variable "bucket_name" {
   default = "test-bucket-745"
+}
+
+variable "bucket_prefix" {
+  default = "unique-prefix"
 }
 
 variable "destroy" {
@@ -15,6 +24,11 @@ variable "object_lock" {
 
 variable "bucket_tag" {
   default = "Bucket-tag"
+}
+
+variable "access_definition_cnt" {
+  type    = number
+  default = 1
 }
 
 variable "block_public_acls" {
@@ -37,8 +51,18 @@ variable "restrict_public_buckets" {
   default = true
 }
 
+variable "ownership_definiton_cnt" {
+  type    = number
+  default = 1
+}
+
 variable "obj_ownership" {
   default = "BucketOwnerPreferred"
+}
+
+variable "object_cnt" {
+  type    = number
+  default = 1
 }
 
 variable "object_name" {
@@ -53,8 +77,44 @@ variable "content_type" {
   default = "text/html"
 }
 
+variable "storage_class" {
+  default = "STANDARD"
+}
+
+variable "object_tag" {
+  default = "Object-tag-value"
+}
+
+#variable "policy_action" {
+#  type = list(string)
+#  default = ["s3:GetObject"]
+#}
+#
+#variable "policy_resource" {
+#  type = list(string)
+#  default = ["${var.bucket_arn}/*"]
+#}
+#
+#variable "principal_type" {
+#  default = "Service"
+#}
+#
+#variable "principals" {
+#  type = list(string)
+#  default = ["cloudfront.amazonaws.com"]
+#}
+
+variable "acl_cnt" {
+  type    = number
+  default = 1
+}
+
 variable "acl" {
   default = "private"
+}
+
+variable "expected_owner_id" {
+  default = "637423489195"
 }
 
 variable "tf_data_for_index" {
@@ -65,6 +125,66 @@ variable "tf_data_for_index" {
 #Missing
 variable "backend_endpoint" {}
 
+variable "versioning_res_cnt" {
+  type    = number
+  default = 0
+}
+
 variable "versioning" {
   default = "Enabled"
 }
+
+variable "mfa_delete" {
+  default = "Disabled"
+}
+
+variable "acceleration_res_cnt" {
+  type    = number
+  default = 0
+}
+
+variable "acceleration_status" {
+  default = "Suspended"
+}
+
+variable "lock_res_cnt" {
+  type    = number
+  default = 0
+}
+
+variable "lock_bucket_index" {
+  type    = number
+  default = 0
+}
+
+variable "lock_retention_mode" {
+  default = "GOVERNANCE"
+}
+
+variable "lock_retention_days" {
+  type    = number
+  default = 0
+}
+
+variable "payment_conf_cnt" {
+  type    = number
+  default = 0
+}
+
+variable "payer" {
+  default = "Requester"
+}
+
+variable "website_conf_cnt" {
+  type    = number
+  default = 0
+}
+
+variable "index_doc" {
+  default = "index.html"
+}
+
+variable "error_doc" {
+  default = ""
+}
+

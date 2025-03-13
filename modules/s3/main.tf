@@ -1,7 +1,10 @@
 resource "aws_s3_bucket" "this" {
+  count         = var.bucket_cnt
   bucket        = var.bucket_name
   force_destroy = var.destroy
+  #bucket_prefix = var.bucket_prefix
   #object_lock_enabled = var.object_lock
+  #acl = var.acl
 
   tags = {
     Name = var.bucket_tag
@@ -9,7 +12,8 @@ resource "aws_s3_bucket" "this" {
 }
 
 resource "aws_s3_bucket_public_access_block" "this" {
-  bucket = aws_s3_bucket.this.id
+  count  = var.access_definition_cnt
+  bucket = aws_s3_bucket.this[count.index].id
 
   block_public_acls       = var.block_public_acls
   block_public_policy     = var.block_public_policy
@@ -18,34 +22,81 @@ resource "aws_s3_bucket_public_access_block" "this" {
 }
 
 resource "aws_s3_bucket_ownership_controls" "this" {
-  bucket = aws_s3_bucket.this.id
+  count  = var.ownership_definiton_cnt
+  bucket = aws_s3_bucket.this[count.index].id
   rule {
     object_ownership = var.obj_ownership
   }
 }
 
 resource "aws_s3_bucket_acl" "this" {
-  bucket = aws_s3_bucket.this.id
-  acl    = var.acl
+  count                 = var.acl_cnt
+  bucket                = aws_s3_bucket.this[count.index].id
+  acl                   = var.acl
+  expected_bucket_owner = var.expected_owner_id
 
   depends_on = [aws_s3_bucket_ownership_controls.this]
 }
 
 resource "aws_s3_bucket_versioning" "this" {
-  bucket = aws_s3_bucket.this.id
+  count  = var.versioning_res_cnt
+  bucket = aws_s3_bucket.this[count.index].id
   versioning_configuration {
-    status = var.versioning
+    status     = var.versioning
+    mfa_delete = var.mfa_delete
+  }
+}
+
+resource "aws_s3_bucket_accelerate_configuration" "this" {
+  count  = var.acceleration_res_cnt
+  bucket = aws_s3_bucket.this[count.index].id
+  status = var.acceleration_status
+}
+
+resource "aws_s3_bucket_object_lock_configuration" "this" {
+  count  = var.lock_res_cnt
+  bucket = aws_s3_bucket.this[var.lock_bucket_index].id
+
+  rule {
+    default_retention {
+      mode = var.lock_retention_mode
+      days = var.lock_retention_days
+      #years
+    }
+  }
+}
+
+resource "aws_s3_bucket_request_payment_configuration" "this" {
+  count  = var.payment_conf_cnt
+  bucket = aws_s3_bucket.this[count.index].id
+  payer  = var.payer
+}
+
+resource "aws_s3_bucket_website_configuration" "this" {
+  count  = var.website_conf_cnt
+  bucket = aws_s3_bucket.this[count.index].id
+
+  index_document {
+    suffix = var.index_doc
+  }
+
+  error_document {
+    key = var.error_doc
   }
 }
 
 resource "aws_s3_object" "this" {
-  bucket = aws_s3_bucket.this.id
-  key    = var.object_name
-  #source       = "${path.module}/objects/index.html"
-  source       = "${path.module}/${var.obj_rel_path}"
-  content_type = var.content_type
+  count         = var.object_cnt
+  bucket        = aws_s3_bucket.this[count.index].id
+  key           = var.object_name
+  source        = "${path.module}/${var.obj_rel_path}"
+  content_type  = var.content_type
+  storage_class = var.storage_class
   #acl = var.acl
 
+  tags = {
+    Name = var.object_tag
+  }
 }
 
 resource "terraform_data" "for_index_file" {
