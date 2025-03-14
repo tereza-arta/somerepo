@@ -102,25 +102,25 @@ variable "route_key" {
   default = "ANY /{proxy+}"
 }
 
-variable "lambda_perm_cnt" {
-  type    = number
-  default = 1
-}
-
-variable "perm_statement_id" {
-  default = "LambdaPermForAPIGateway"
-}
-
-variable "perm_action" {
-  default = "lambda:InvokeFunction"
-}
-
-#Missing
-variable "lambda_func_name" {}
-
-variable "principal" {
-  default = "apigateway.amazonaws.com"
-}
+#variable "lambda_perm_cnt" {
+#  type    = number
+#  default = 1
+#}
+#
+#variable "perm_statement_id" {
+#  default = "LambdaPermForAPIGateway"
+#}
+#
+#variable "perm_action" {
+#  default = "lambda:InvokeFunction"
+#}
+#
+##Missing
+#variable "lambda_func_name" {}
+#
+#variable "principal" {
+#  default = "apigateway.amazonaws.com"
+#}
 
 variable "aws_cert_cnt" {
   type    = number

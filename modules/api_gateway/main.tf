@@ -78,16 +78,6 @@ resource "aws_apigatewayv2_route" "proxy" {
   target    = "integrations/${aws_apigatewayv2_integration.lambda[count.index].id}"
 }
 
-resource "aws_lambda_permission" "api_gw" {
-  count         = var.lambda_perm_cnt
-  statement_id  = var.perm_statement_id
-  action        = var.perm_action
-  function_name = var.lambda_func_name
-  principal     = var.principal
-
-  source_arn = "${aws_apigatewayv2_api.this[count.index].execution_arn}/*/*"
-}
-
 #Certificate/domain configuration
 #>>>>>
 resource "aws_acm_certificate" "this" {
@@ -106,3 +96,13 @@ resource "aws_apigatewayv2_domain_name" "this" {
     security_policy = "TLS_1_2"
   }
 }
+
+#resource "aws_lambda_permission" "api_gw" {
+#  count         = var.lambda_perm_cnt
+#  statement_id  = var.perm_statement_id
+#  action        = var.perm_action
+#  function_name = var.lambda_func_name
+#  principal     = var.principal
+#
+#  source_arn = "${aws_apigatewayv2_api.this[count.index].execution_arn}/*/*"
+#}

@@ -107,6 +107,8 @@ variable "func_name" {
   default = "apiFunc"
 }
 
+variable "lambda_role" {}
+
 variable "handler" {
   default = "index.handler"
 }
@@ -141,25 +143,22 @@ variable "recursive_loop" {
   default = "Allow"
 }
 
-#variable "lambda_perm_cnt" {
-#  type = number
-#  default = 1
-#}
-#
-#variable "perm_statement_id" {
-#  default = "LambdaPermForAPIGateway"
-#}
-#
-#variable "perm_action" {
-#  default = "lambda:InvokeFunction"
-#}
-#
-##Missing
-#variable "lambda_func_name" {}
-#
-#variable "principal" {
-#  default = "apigateway.amazonaws.com"
-#}
-#
-##Missing
-#variable "exec_arn" {}
+variable "lambda_perm_cnt" {
+  type    = number
+  default = 1
+}
+
+variable "perm_statement_id" {
+  default = "LambdaPermForAPIGateway"
+}
+
+variable "perm_action" {
+  default = "lambda:InvokeFunction"
+}
+
+variable "perm_principal" {
+  default = "apigateway.amazonaws.com"
+}
+
+#Missing
+variable "exec_arn" {}

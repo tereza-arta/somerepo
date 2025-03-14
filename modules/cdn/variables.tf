@@ -122,6 +122,8 @@ variable "policy_action" {
   default = ["s3:GetObject"]
 }
 
+variable "bucket_arn" {}
+
 variable "principal_type" {
   default = "Service"
 }
@@ -144,5 +146,5 @@ variable "policy_cnt" {
   default = 1
 }
 
-variable "bucket_arn" {}
+#variable "bucket_arn" {}
 

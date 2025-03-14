@@ -53,25 +53,25 @@ resource "aws_cloudfront_distribution" "this" {
 
 }
 
-data "aws_iam_policy_document" "s3_bucket_policy" {
-  count = var.policy_doc_cnt
-  statement {
-    actions   = var.policy_action
-    resources = ["${var.bucket_arn}/*"]
-    principals {
-      type        = var.principal_type
-      identifiers = var.principals
-    }
-    condition {
-      test     = var.condition_name
-      variable = var.condition_var
-      values   = [aws_cloudfront_distribution.this[count.index].arn]
-    }
-  }
-}
+#data "aws_iam_policy_document" "s3_bucket_policy" {
+#  count = var.policy_doc_cnt
+#  statement {
+#    actions   = var.policy_action
+#    resources = ["${var.bucket_arn}/*"]
+#    principals {
+#      type        = var.principal_type
+#      identifiers = var.principals
+#    }
+#    condition {
+#      test     = var.condition_name
+#      variable = var.condition_var
+#      values   = [aws_cloudfront_distribution.this[count.index].arn]
+#    }
+#  }
+#}
 
-resource "aws_s3_bucket_policy" "static_site_bucket_policy" {
-  count  = var.policy_cnt
-  bucket = var.origin_id
-  policy = data.aws_iam_policy_document.s3_bucket_policy[count.index].json
-}
+#resource "aws_s3_bucket_policy" "static_site_bucket_policy" {
+#  count  = var.policy_cnt
+#  bucket = var.origin_id
+#  policy = data.aws_iam_policy_document.s3_bucket_policy[count.index].json
+#}

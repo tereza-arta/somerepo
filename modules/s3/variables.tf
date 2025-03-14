@@ -117,6 +117,16 @@ variable "expected_owner_id" {
   default = "637423489195"
 }
 
+variable "policy_cnt" {
+  type    = number
+  default = 1
+}
+
+#Missing
+variable "s3_bucket_policy" {}
+
+#variable "origin_id" {}
+
 variable "tf_data_for_index" {
   type    = bool
   default = true

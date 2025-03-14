@@ -1,3 +1,19 @@
+locals {
+  ob_name_split    = split(".", var.obj_rel_path)
+  content_type_key = local.ob_name_split[1]
+  content_type = {
+    html = "text/html"
+    css  = "text/css"
+    jpeg = "image/jpeg"
+    jpg  = "image/jpeg"
+    json = "application/json"
+    mp4  = "video/mp4"
+    png  = "image/png"
+    pdf  = "application/pdf"
+    xls  = "application/vnd.ms-excel"
+  }
+}
+
 resource "aws_s3_bucket" "this" {
   count         = var.bucket_cnt
   bucket        = var.bucket_name
@@ -86,17 +102,20 @@ resource "aws_s3_bucket_website_configuration" "this" {
 }
 
 resource "aws_s3_object" "this" {
-  count         = var.object_cnt
-  bucket        = aws_s3_bucket.this[count.index].id
-  key           = var.object_name
-  source        = "${path.module}/${var.obj_rel_path}"
-  content_type  = var.content_type
+  count  = var.object_cnt
+  bucket = aws_s3_bucket.this[count.index].id
+  key    = var.object_name
+  source = "${path.module}/${var.obj_rel_path}"
+  #content_type  = var.content_type
+  content_type  = lookup(local.content_type, local.content_type_key)
   storage_class = var.storage_class
   #acl = var.acl
 
   tags = {
     Name = var.object_tag
   }
+
+  depends_on = [terraform_data.for_index_file[0]]
 }
 
 resource "terraform_data" "for_index_file" {
@@ -110,3 +129,10 @@ resource "terraform_data" "for_index_file" {
     "run_at" = timestamp()
   }
 }
+
+resource "aws_s3_bucket_policy" "static_site_bucket_policy" {
+  count  = var.policy_cnt
+  bucket = aws_s3_bucket.this[0].id
+  policy = var.s3_bucket_policy
+}
+
